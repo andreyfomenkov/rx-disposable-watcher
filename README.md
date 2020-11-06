@@ -1,2 +1,2 @@
-# rx-disposable-watcher
+# RxDisposableWatcher
 A library for detecting missed (leaked) disposable subscriptions in Rx chains.
