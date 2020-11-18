@@ -1,0 +1,92 @@
+buildscript {
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'base'
+    id 'maven-publish'
+}
+
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+}
+
+def properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def bintrayUser = properties.getProperty('user.name')
+def bintrayKey = properties.getProperty('user.key')
+def VERSION_NAME = 1.0
+def GROUP_ID = "ru.fomenkov"
+def REPO_NAME = "maven"
+def PACKAGE_NAME = "rx-disposable-watcher"
+def USER_ORG = "andreyfomenkov"
+def LICENSES = ['Apache-2.0']
+def VCS_URL = "https://github.com/andreyfomenkov/rx-disposable-watcher.git"
+def WEBSITE_URL = "https://github.com/andreyfomenkov/rx-disposable-watcher"
+def ISSUE_TRACKER_URL = "https://github.com/andreyfomenkov/rx-disposable-watcher/issues"
+
+group GROUP_ID
+version VERSION_NAME
+
+bintray {
+    user = bintrayUser
+    key = bintrayKey
+    publications = ['mavenJava']
+
+    pkg {
+        repo = REPO_NAME
+        name = PACKAGE_NAME
+        userOrg = USER_ORG
+        licenses = LICENSES
+        vcsUrl = VCS_URL
+        websiteUrl = WEBSITE_URL
+        issueTrackerUrl = ISSUE_TRACKER_URL
+
+        version {
+            name = VERSION_NAME
+            vcsTag = VERSION_NAME
+            released = new Date()
+        }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: project.classes) {
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: project.javadoc) {
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId project.bintray.pkg.name
+            from components.java
+
+            artifact sourcesJar {
+                classifier = 'sources' as Publication
+            }
+            artifact javadocJar {
+                classifier = 'javadoc' as Publication
+            }
+        }
+    }
+}
