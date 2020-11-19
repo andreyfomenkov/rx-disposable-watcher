@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.title {
+  background-color: #fff;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 2px;
+  font-family: monospace;
+  font-size: 16px;
+  color: #000;
+}
+
+.collapsed {
+  background-color: #ddd;
+  color: #373d48;
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 2px solid #ddd;
+  text-align: left;
+  outline: none;
+  font-family: monospace;
+  font-size: 16px;
+  color: black;
+}
+
+.expanded {
+  background-color: #fff;
+  color: #373d48;
+  cursor: pointer;
+  padding: 16px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 2px solid #77a;
+  text-align: left;
+  outline: none;
+  font-family: monospace;
+  font-size: 16px;
+  color: black;
+}
+
+.circle {
+    border: 2px solid #000;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+}
+</style>
+</head>
+<body style="background: #fff;">
+
+<div class="title" style="margin-bottom: 10px;">
+  <a style="float: left; margin-right: 8px;" href="https://github.com/andreyfomenkov">RxDisposeWatcher v#value-version</a>
+  <div style="margin-bottom: 4px;"># Andrey Fomenkov</div>
+  <div style="float: left; margin-right: 8px; font-weight: bold;">Total #value-total</div>
+  <a style="float: left; margin-right: 8px;" href="http://reactivex.io/RxJava/javadoc//io/reactivex/disposables/Disposable.html">Disposable</a>
+  <div style="float: left; margin-right: 8px; font-weight: bold;">object(s) not destroyed.</div>
+  <div>Tap an item to expand / collapse full stacktrace.</div>
+</div>
+
+#value-items
+
+<script>
+const collapsedList = document.getElementsByClassName("collapsed");
+const expandedList = document.getElementsByClassName("expanded");
+const count = collapsedList.length;
+
+for (let i = 0; i < count; i++) {
+  const index = i;
+  const collapsed = collapsedList[index];
+  const expanded = expandedList[index];
+  expanded.style.display = "none";
+
+  collapsed.addEventListener("click", function() {
+    collapsed.style.display = "none";
+    expanded.style.display = "block";
+  });
+  expanded.addEventListener("click", function() {
+    collapsed.style.display = "block";
+    expanded.style.display = "none";
+  });
+}
+</script>
+
+</body>
+</html>

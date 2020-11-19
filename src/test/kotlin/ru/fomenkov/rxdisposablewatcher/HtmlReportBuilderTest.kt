@@ -1,0 +1,89 @@
+package ru.fomenkov.rxdisposablewatcher
+
+import io.reactivex.*
+import org.junit.Assert.*
+import org.junit.Test
+import java.io.File
+
+class HtmlReportBuilderTest : BaseTest() {
+
+    @Test
+    fun testTemplatePlaceholders() {
+        val line = File(TEMPLATE_LINE).readText()
+        val block = File(TEMPLATE_BLOCK).readText()
+        val report = File(TEMPLATE_REPORT).readText()
+
+        assertTrue("Expecting $PLACEHOLDER_VALUE_LINE in $TEMPLATE_LINE", line.contains(PLACEHOLDER_VALUE_LINE))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_COLOR in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_COLOR))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_DETAILS in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_DETAILS))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_REDUCED in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_REDUCED))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_FULL in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_FULL))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_VERSION in $TEMPLATE_REPORT", report.contains(PLACEHOLDER_VALUE_VERSION))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_TOTAL in $TEMPLATE_REPORT", report.contains(PLACEHOLDER_VALUE_TOTAL))
+        assertTrue("Expecting $PLACEHOLDER_VALUE_ITEMS in $TEMPLATE_REPORT", report.contains(PLACEHOLDER_VALUE_ITEMS))
+    }
+
+    @Test
+    fun testTemplateChecksum() {
+        val lineChecksum = File(TEMPLATE_LINE).readText().hashCode()
+        val blockChecksum = File(TEMPLATE_BLOCK).readText().hashCode()
+        val reportChecksum = File(TEMPLATE_REPORT).readText().hashCode()
+
+        assertChecksumEquals(TEMPLATE_LINE, TEMPLATE_LINE_CHECKSUM, lineChecksum)
+        assertChecksumEquals(TEMPLATE_BLOCK, TEMPLATE_BLOCK_CHECKSUM, blockChecksum)
+        assertChecksumEquals(TEMPLATE_REPORT, TEMPLATE_REPORT_CHECKSUM, reportChecksum)
+    }
+
+    @Test
+    fun testOutputHtmlReport() {
+        val observable = Observable.create<Int> {}
+        val single = Single.create<Int> {}
+        val completable = Completable.create {}
+        val maybe = Maybe.create<Int> {}
+        val flowable = observable.toFlowable(BackpressureStrategy.LATEST)
+
+        observable.subscribe()
+        for (i in 0 .. 1) { single.subscribe() }
+        for (i in 0 .. 2) { completable.subscribe() }
+        for (i in 0 .. 3) { maybe.subscribe() }
+        for (i in 0 .. 4) { flowable.subscribe() }
+
+        val probe = RxDisposableWatcher.probe()
+        val builder = HtmlReportBuilder(probe)
+        val report = builder.build()
+
+        assertChecksumEquals("Test output HTML report", TEST_OUTPUT_HTML_REPORT_CHECKSUM, report.hashCode())
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_LINE not replaced", report.contains(PLACEHOLDER_VALUE_LINE))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_COLOR not replaced", report.contains(PLACEHOLDER_VALUE_COLOR))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_DETAILS not replaced", report.contains(PLACEHOLDER_VALUE_DETAILS))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_REDUCED not replaced", report.contains(PLACEHOLDER_VALUE_REDUCED))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_FULL not replaced", report.contains(PLACEHOLDER_VALUE_FULL))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_VERSION not replaced", report.contains(PLACEHOLDER_VALUE_VERSION))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_TOTAL not replaced", report.contains(PLACEHOLDER_VALUE_TOTAL))
+        assertFalse("Placeholder $PLACEHOLDER_VALUE_ITEMS not replaced", report.contains(PLACEHOLDER_VALUE_ITEMS))
+        println(report)
+    }
+
+    private fun assertChecksumEquals(subject: String, expected: Int, actual: Int) {
+        assertEquals("$subject has been modified. Add necessary changes, test them manually and update checksum value", expected, actual)
+    }
+
+    private companion object {
+        const val TEMPLATE_DIR = "template"
+        const val TEMPLATE_LINE = "$TEMPLATE_DIR/line.html"
+        const val TEMPLATE_BLOCK = "$TEMPLATE_DIR/block.html"
+        const val TEMPLATE_REPORT = "$TEMPLATE_DIR/report.html"
+        const val TEMPLATE_LINE_CHECKSUM = -376419563
+        const val TEMPLATE_BLOCK_CHECKSUM = 1920257574
+        const val TEMPLATE_REPORT_CHECKSUM = -174734914
+        const val TEST_OUTPUT_HTML_REPORT_CHECKSUM = -79309058
+        const val PLACEHOLDER_VALUE_LINE = "#value-line"
+        const val PLACEHOLDER_VALUE_COLOR = "#value-color"
+        const val PLACEHOLDER_VALUE_DETAILS = "#value-details"
+        const val PLACEHOLDER_VALUE_REDUCED = "#value-reduced"
+        const val PLACEHOLDER_VALUE_FULL = "#value-full"
+        const val PLACEHOLDER_VALUE_VERSION = "#value-version"
+        const val PLACEHOLDER_VALUE_TOTAL = "#value-total"
+        const val PLACEHOLDER_VALUE_ITEMS = "#value-items"
+    }
+}

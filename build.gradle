@@ -20,30 +20,32 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
+    testImplementation 'junit:junit:4.12'
 }
 
-def properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def PROPERTIES = new Properties()
+PROPERTIES.load(project.rootProject.file('local.properties').newDataInputStream())
 
-def bintrayUser = properties.getProperty('user.name')
-def bintrayKey = properties.getProperty('user.key')
-def VERSION_NAME = 1.0
-def GROUP_ID = "ru.fomenkov"
-def REPO_NAME = "maven"
-def PACKAGE_NAME = "rx-disposable-watcher"
-def USER_ORG = "andreyfomenkov"
+def BINTRAY_USER = PROPERTIES.getProperty('user.name')
+def BINTRAY_KEY = PROPERTIES.getProperty('user.key')
+def VERSION = new File('version').text.trim()
+def GROUP_ID = 'ru.fomenkov'
+def REPO_NAME = 'maven'
+def PACKAGE_NAME = 'rx-disposable-watcher'
+def USER_ORG = 'andreyfomenkov'
 def LICENSES = ['Apache-2.0']
-def VCS_URL = "https://github.com/andreyfomenkov/rx-disposable-watcher.git"
-def WEBSITE_URL = "https://github.com/andreyfomenkov/rx-disposable-watcher"
-def ISSUE_TRACKER_URL = "https://github.com/andreyfomenkov/rx-disposable-watcher/issues"
+def VCS_URL = 'https://github.com/andreyfomenkov/rx-disposable-watcher.git'
+def WEBSITE_URL = 'https://github.com/andreyfomenkov/rx-disposable-watcher'
+def ISSUE_TRACKER_URL = 'https://github.com/andreyfomenkov/rx-disposable-watcher/issues'
 
 group GROUP_ID
-version VERSION_NAME
+version VERSION
 
 bintray {
-    user = bintrayUser
-    key = bintrayKey
+    user = BINTRAY_USER
+    key = BINTRAY_KEY
     publications = ['mavenJava']
 
     pkg {
@@ -56,8 +58,8 @@ bintray {
         issueTrackerUrl = ISSUE_TRACKER_URL
 
         version {
-            name = VERSION_NAME
-            vcsTag = VERSION_NAME
+            name = VERSION
+            vcsTag = VERSION
             released = new Date()
         }
     }
