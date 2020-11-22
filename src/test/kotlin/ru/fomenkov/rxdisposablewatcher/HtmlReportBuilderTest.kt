@@ -3,15 +3,15 @@ package ru.fomenkov.rxdisposablewatcher
 import io.reactivex.*
 import org.junit.Assert.*
 import org.junit.Test
-import java.io.File
+import ru.fomenkov.rxdisposablewatcher.report.HtmlReportBuilder
 
 class HtmlReportBuilderTest : BaseTest() {
 
     @Test
     fun testTemplatePlaceholders() {
-        val line = File(TEMPLATE_LINE).readText()
-        val block = File(TEMPLATE_BLOCK).readText()
-        val report = File(TEMPLATE_REPORT).readText()
+        val line = javaClass.getResource(TEMPLATE_LINE).readText()
+        val block = javaClass.getResource(TEMPLATE_BLOCK).readText()
+        val report = javaClass.getResource(TEMPLATE_REPORT).readText()
 
         assertTrue("Expecting $PLACEHOLDER_VALUE_LINE in $TEMPLATE_LINE", line.contains(PLACEHOLDER_VALUE_LINE))
         assertTrue("Expecting $PLACEHOLDER_VALUE_COLOR in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_COLOR))
@@ -25,9 +25,9 @@ class HtmlReportBuilderTest : BaseTest() {
 
     @Test
     fun testTemplateChecksum() {
-        val lineChecksum = File(TEMPLATE_LINE).readText().hashCode()
-        val blockChecksum = File(TEMPLATE_BLOCK).readText().hashCode()
-        val reportChecksum = File(TEMPLATE_REPORT).readText().hashCode()
+        val lineChecksum = javaClass.getResource(TEMPLATE_LINE).readText().hashCode()
+        val blockChecksum = javaClass.getResource(TEMPLATE_BLOCK).readText().hashCode()
+        val reportChecksum = javaClass.getResource(TEMPLATE_REPORT).readText().hashCode()
 
         assertChecksumEquals(TEMPLATE_LINE, TEMPLATE_LINE_CHECKSUM, lineChecksum)
         assertChecksumEquals(TEMPLATE_BLOCK, TEMPLATE_BLOCK_CHECKSUM, blockChecksum)
@@ -69,7 +69,7 @@ class HtmlReportBuilderTest : BaseTest() {
     }
 
     private companion object {
-        const val TEMPLATE_DIR = "template"
+        const val TEMPLATE_DIR = "/template"
         const val TEMPLATE_LINE = "$TEMPLATE_DIR/line.html"
         const val TEMPLATE_BLOCK = "$TEMPLATE_DIR/block.html"
         const val TEMPLATE_REPORT = "$TEMPLATE_DIR/report.html"

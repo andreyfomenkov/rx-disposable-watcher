@@ -1,4 +1,4 @@
-package ru.fomenkov.rxdisposablewatcher
+package ru.fomenkov.rxdisposablewatcher.report
 
 interface ReportBuilder<T> {
 

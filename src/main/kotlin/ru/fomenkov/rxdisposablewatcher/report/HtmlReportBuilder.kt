@@ -1,6 +1,7 @@
-package ru.fomenkov.rxdisposablewatcher
+package ru.fomenkov.rxdisposablewatcher.report
 
-import java.io.File
+import ru.fomenkov.rxdisposablewatcher.ProbeEntry
+import ru.fomenkov.rxdisposablewatcher.SourceType
 
 class HtmlReportBuilder(
     private val probe: List<ProbeEntry>,
@@ -11,15 +12,18 @@ class HtmlReportBuilder(
 
     init {
         template = Template(
-            line = File(TEMPLATE_LINE).readText(),
-            block = File(TEMPLATE_BLOCK).readLines(),
-            report = File(TEMPLATE_REPORT).readLines()
+            line = javaClass.getResource(TEMPLATE_LINE)
+                .readText(),
+            block = javaClass.getResource(TEMPLATE_BLOCK)
+                .readText().lines(),
+            report = javaClass.getResource(TEMPLATE_REPORT)
+                .readText().lines()
         )
     }
 
     override fun build(): String {
         val blocks = mutableListOf<String>()
-        val version = File("version").readText().trim()
+        val version = "0.0.1" // FIXME
         val total = probe.sumBy { it.entries }
 
         probe.forEach { item ->
@@ -105,7 +109,7 @@ class HtmlReportBuilder(
     private fun createLine(value: String) = template.line.replace(PLACEHOLDER_VALUE_LINE, value)
 
     private companion object {
-        const val TEMPLATE_DIR = "template"
+        const val TEMPLATE_DIR = "/template"
         const val TEMPLATE_LINE = "$TEMPLATE_DIR/line.html"
         const val TEMPLATE_BLOCK = "$TEMPLATE_DIR/block.html"
         const val TEMPLATE_REPORT = "$TEMPLATE_DIR/report.html"

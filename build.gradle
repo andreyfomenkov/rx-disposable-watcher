@@ -84,10 +84,10 @@ publishing {
             from components.java
 
             artifact sourcesJar {
-                classifier = 'sources' as Publication
+                classifier = 'sources'
             }
             artifact javadocJar {
-                classifier = 'javadoc' as Publication
+                classifier = 'javadoc'
             }
         }
     }
