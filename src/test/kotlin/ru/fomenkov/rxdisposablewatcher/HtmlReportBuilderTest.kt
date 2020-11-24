@@ -18,7 +18,6 @@ class HtmlReportBuilderTest : BaseTest() {
         assertTrue("Expecting $PLACEHOLDER_VALUE_DETAILS in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_DETAILS))
         assertTrue("Expecting $PLACEHOLDER_VALUE_REDUCED in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_REDUCED))
         assertTrue("Expecting $PLACEHOLDER_VALUE_FULL in $TEMPLATE_BLOCK", block.contains(PLACEHOLDER_VALUE_FULL))
-        assertTrue("Expecting $PLACEHOLDER_VALUE_VERSION in $TEMPLATE_REPORT", report.contains(PLACEHOLDER_VALUE_VERSION))
         assertTrue("Expecting $PLACEHOLDER_VALUE_TOTAL in $TEMPLATE_REPORT", report.contains(PLACEHOLDER_VALUE_TOTAL))
         assertTrue("Expecting $PLACEHOLDER_VALUE_ITEMS in $TEMPLATE_REPORT", report.contains(PLACEHOLDER_VALUE_ITEMS))
     }
@@ -58,9 +57,9 @@ class HtmlReportBuilderTest : BaseTest() {
         assertFalse("Placeholder $PLACEHOLDER_VALUE_DETAILS not replaced", report.contains(PLACEHOLDER_VALUE_DETAILS))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_REDUCED not replaced", report.contains(PLACEHOLDER_VALUE_REDUCED))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_FULL not replaced", report.contains(PLACEHOLDER_VALUE_FULL))
-        assertFalse("Placeholder $PLACEHOLDER_VALUE_VERSION not replaced", report.contains(PLACEHOLDER_VALUE_VERSION))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_TOTAL not replaced", report.contains(PLACEHOLDER_VALUE_TOTAL))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_ITEMS not replaced", report.contains(PLACEHOLDER_VALUE_ITEMS))
+
         println(report)
     }
 
@@ -74,15 +73,14 @@ class HtmlReportBuilderTest : BaseTest() {
         const val TEMPLATE_BLOCK = "$TEMPLATE_DIR/block.html"
         const val TEMPLATE_REPORT = "$TEMPLATE_DIR/report.html"
         const val TEMPLATE_LINE_CHECKSUM = -376419563
-        const val TEMPLATE_BLOCK_CHECKSUM = 1920257574
-        const val TEMPLATE_REPORT_CHECKSUM = -174734914
-        const val TEST_OUTPUT_HTML_REPORT_CHECKSUM = -79309058
+        const val TEMPLATE_BLOCK_CHECKSUM = 2088613418
+        const val TEMPLATE_REPORT_CHECKSUM = -795649292
+        const val TEST_OUTPUT_HTML_REPORT_CHECKSUM = -74823822
         const val PLACEHOLDER_VALUE_LINE = "#value-line"
         const val PLACEHOLDER_VALUE_COLOR = "#value-color"
         const val PLACEHOLDER_VALUE_DETAILS = "#value-details"
         const val PLACEHOLDER_VALUE_REDUCED = "#value-reduced"
         const val PLACEHOLDER_VALUE_FULL = "#value-full"
-        const val PLACEHOLDER_VALUE_VERSION = "#value-version"
         const val PLACEHOLDER_VALUE_TOTAL = "#value-total"
         const val PLACEHOLDER_VALUE_ITEMS = "#value-items"
     }

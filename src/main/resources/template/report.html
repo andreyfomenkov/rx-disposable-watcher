@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
 
 .title {
-  background-color: #fff;
-  color: white;
+  background-color: #eef;
+  color: black;
   cursor: pointer;
   text-align: left;
-  margin-top: 10px;
-  margin-left: 2px;
+  padding: 4px;
+  border: none;
   font-family: monospace;
   font-size: 16px;
-  color: #000;
 }
 
 .collapsed {
-  background-color: #ddd;
-  color: #373d48;
+  background-color: white;
   cursor: pointer;
-  padding: 16px;
   width: 100%;
-  margin-bottom: 10px;
-  border: 2px solid #ddd;
+  padding: 16px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25), 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  border: 1px solid white;
   text-align: left;
   outline: none;
   font-family: monospace;
-  font-size: 16px;
+  font-size: 15px;
   color: black;
 }
 
 .expanded {
-  background-color: #fff;
-  color: #373d48;
+  background-color: white;
   cursor: pointer;
-  padding: 16px;
-  margin-bottom: 10px;
   width: 100%;
-  border: 2px solid #77a;
+  padding: 16px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25), 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  border: 1px solid white;
   text-align: left;
   outline: none;
   font-family: monospace;
-  font-size: 16px;
+  font-size: 15px;
   color: black;
 }
 
@@ -56,15 +55,15 @@
 }
 </style>
 </head>
-<body style="background: #fff;">
+<body style="background: #eef;">
 
-<div class="title" style="margin-bottom: 10px;">
-  <a style="float: left; margin-right: 8px;" href="https://github.com/andreyfomenkov">RxDisposeWatcher v#value-version</a>
-  <div style="margin-bottom: 4px;"># Andrey Fomenkov</div>
+<div class="title">
+  <a style="float: left; margin-right: 8px;" href="https://github.com/andreyfomenkov/rx-disposable-watcher">RxDisposeWatcher</a>
+  <div style="margin-bottom: 4px;">on GitHub # Andrey Fomenkov</div>
   <div style="float: left; margin-right: 8px; font-weight: bold;">Total #value-total</div>
-  <a style="float: left; margin-right: 8px;" href="http://reactivex.io/RxJava/javadoc//io/reactivex/disposables/Disposable.html">Disposable</a>
-  <div style="float: left; margin-right: 8px; font-weight: bold;">object(s) not destroyed.</div>
-  <div>Tap an item to expand / collapse full stacktrace.</div>
+  <a style="float: left; margin-right: 8px;"
+     href="http://reactivex.io/RxJava/javadoc//io/reactivex/disposables/Disposable.html">Disposable</a>
+  <div style="margin-right: 8px; margin-bottom: 8px; font-weight: bold;">object(s) not destroyed.</div>
 </div>
 
 #value-items

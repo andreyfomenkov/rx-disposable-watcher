@@ -23,7 +23,6 @@ class HtmlReportBuilder(
 
     override fun build(): String {
         val blocks = mutableListOf<String>()
-        val version = "0.0.1" // FIXME
         val total = probe.sumBy { it.entries }
 
         probe.forEach { item ->
@@ -36,7 +35,7 @@ class HtmlReportBuilder(
             }
             blocks += createBlock(lines, reducedBlockSize, color, details)
         }
-        return createReport(blocks, version, total)
+        return createReport(blocks, total)
     }
 
     private fun getDetails(sourceType: SourceType, entries: Int) =
@@ -50,7 +49,7 @@ class HtmlReportBuilder(
         SourceType.FLOWABLE -> "#ff0000"
     }
 
-    private fun createReport(blocks: List<String>, version: String, total: Int): String {
+    private fun createReport(blocks: List<String>, total: Int): String {
         val builder = StringBuilder()
         val itemsPlaceholderIndex = template.report.indexOfFirst { it.contains(PLACEHOLDER_VALUE_ITEMS) }
 
@@ -66,7 +65,6 @@ class HtmlReportBuilder(
         }
         return builder
             .toString()
-            .replace(PLACEHOLDER_VALUE_VERSION, version)
             .replace(PLACEHOLDER_VALUE_TOTAL, total.toString())
             .trim()
     }
@@ -118,7 +116,6 @@ class HtmlReportBuilder(
         const val PLACEHOLDER_VALUE_DETAILS = "#value-details"
         const val PLACEHOLDER_VALUE_REDUCED = "#value-reduced"
         const val PLACEHOLDER_VALUE_FULL = "#value-full"
-        const val PLACEHOLDER_VALUE_VERSION = "#value-version"
         const val PLACEHOLDER_VALUE_TOTAL = "#value-total"
         const val PLACEHOLDER_VALUE_ITEMS = "#value-items"
         const val DEFAULT_REDUCED_BLOCK_SIZE = 3
