@@ -17,14 +17,31 @@ Please replace `x.y.z` with the latest version numbers:
 ```kotlin
 RxDisposableWatcher.init()
 ```
-In order to save and then pull HTML report for Android application, add the necessary permission into `AndroidManifest.xml`:
+In order to save and then pull HTML report for Android application, add the necessary external storage permission into `AndroidManifest.xml`:
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
 ### Make snapshot & generate HTML report
-Check whether you have alive Rx subscriptions at the moment:
+Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
 ```kotlin
-// The `list` contains info about subscriptions: stacktrace, type and number of entries
-val list = RxDisposableWatcher.probe()
+// The `result` contains info about subscriptions: stacktrace, type and number of entries
+val result = RxDisposableWatcher.probe()
 ```
+Add a step for generating a report:
+```kotlin
+val result = RxDisposableWatcher.probe()
+val report = HtmlReportBuilder(result).build() // Code of the generated HMTL report
+```
+Write the report into Android external storage:
+```kotlin
+val report = ...
+val file = File(context.getExternalFilesDir(null), "report.html") // Specify file name
+val stream = FileOutputStream(file)
+stream.use {
+  it.write(report.toByteArray())
+}
+```
+
+### Display HTML report
+Let's take a look inside
