@@ -1,5 +1,14 @@
-## RxDisposableWatcher: monitoring leaked subscriptions in RxJava projects
-A library for monitoring leaked [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) subscriptions in RxJava projects and building comprehensive HTML reports.
+## RxDisposableWatcher: monitoring alive subscriptions in RxJava projects
+## The Purpose:
+It's always possible to forget about releasing a resource, e.g.:
+```kotlin
+val subject = BehaviorSubject.create<State>()
+// ...
+subject.subscribe {} // We'd never used `Disposable` return result to stop receiving items
+```
+In this example we subscribed to RxJava subject but never destroyed the subscription afterwards.
+
+**Sometimes it can break application logic or even cause a memory leak! 💩**
 
 ## Getting started
 ### Download
@@ -36,7 +45,7 @@ val report = HtmlReportBuilder(result).build() // Code of the generated HMTL rep
 Write the report into Android external storage:
 ```kotlin
 val report = ...
-val file = File(context.getExternalFilesDir(null), "report.html") // Specify file name
+val file = File(context.getExternalFilesDir(null), "report.html") // Specify filename
 val stream = FileOutputStream(file)
 stream.use {
   it.write(report.toByteArray())
@@ -44,4 +53,15 @@ stream.use {
 ```
 
 ### Display HTML report
-Let's take a look inside
+Let's pull a file from Android device and take a look:
+```shell
+adb pull /sdcard/report.html ~/report.html # Change path / filename on your own
+open ~/report.html # for Mac
+# or
+google-chrome ~/report.html # for Linux
+```
+
+### Displaying HTML report (LIKE A BOSS 😎)
+**I want to have a magic button in Android Studio. By clicking display HTML report on my desktop.**
+
+It's always possible to do it using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html).
