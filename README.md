@@ -1,14 +1,14 @@
-## RxDisposableWatcher: monitoring alive subscriptions in RxJava projects
-## The Purpose:
-It's always possible to forget about releasing a resource, e.g.:
+## RxDisposableWatcher — monitoring alive subscriptions in RxJava projects
+### The Problem:
+Let's imagine the following situation with RxJava:
 ```kotlin
 val subject = BehaviorSubject.create<State>()
 // ...
-subject.subscribe {} // We'd never used `Disposable` return result to stop receiving items
+subject.subscribe { /* Do something */ } // We didn't call dispose() to stop receiving items from `subject`
 ```
-In this example we subscribed to RxJava subject but never destroyed the subscription afterwards.
+We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩**
 
-**Sometimes it can break application logic or even cause a memory leak! 💩**
+With _RxDisposableWatcher_ it's possible to catch and analyze all undestroyed subscriptions in your application **_at the moment_**:
 
 ## Getting started
 ### Download
@@ -34,28 +34,22 @@ In order to save and then pull HTML report for Android application, add the nece
 ### Make snapshot & generate HTML report
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
 ```kotlin
-// The `result` contains info about subscriptions: stacktrace, type and number of entries
-val result = RxDisposableWatcher.probe()
+val result = RxDisposableWatcher.probe() // Exhaustive info: stacktrace, number of calls, etc.
+val report = HtmlReportBuilder(result).build() // Generate HTML report
 ```
-Add a step for generating a report:
-```kotlin
-val result = RxDisposableWatcher.probe()
-val report = HtmlReportBuilder(result).build() // Code of the generated HMTL report
-```
-Write the report into Android external storage:
+Save the report to Android external storage:
 ```kotlin
 val report = ...
 val file = File(context.getExternalFilesDir(null), "report.html") // Specify filename
 val stream = FileOutputStream(file)
-stream.use {
-  it.write(report.toByteArray())
-}
+stream.use { it.write(report.toByteArray()) }
 ```
 
 ### Display HTML report
 Let's pull a file from Android device and take a look:
 ```shell
-adb pull /sdcard/report.html ~/report.html # Change path / filename on your own
+adb pull /sdcard/report.html ~/report.html # Grab a report from Android device
+# Then display in browser
 open ~/report.html # for Mac
 # or
 google-chrome ~/report.html # for Linux
