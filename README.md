@@ -4,11 +4,9 @@ Let's imagine the following situation with RxJava:
 ```kotlin
 val subject = BehaviorSubject.create<State>()
 // ...
-subject.subscribe { /* Do something */ } // We didn't call dispose() to stop receiving items from `subject`
+subject.subscribe { /* Do something */ } // We didn't call dispose() to stop receiving items
 ```
-We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩**
-
-With _RxDisposableWatcher_ it's possible to catch and analyze all undestroyed subscriptions in your application **_at the moment_**:
+We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩** With _RxDisposableWatcher_ it's possible to catch and analyze all undestroyed subscriptions in your application _at the moment_:
 
 ## Getting started
 ### Download
@@ -46,10 +44,10 @@ stream.use { it.write(report.toByteArray()) }
 ```
 
 ### Display HTML report
-Let's pull a file from Android device and take a look:
+Pull report file from Android device and display:
 ```shell
 adb pull /sdcard/report.html ~/report.html # Grab a report from Android device
-# Then display in browser
+# Then display in a browser
 open ~/report.html # for Mac
 # or
 google-chrome ~/report.html # for Linux
