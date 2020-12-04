@@ -29,7 +29,7 @@ For Android application add storage permission into `AndroidManifest.xml` to sav
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-### Make snapshot & generate HTML report
+### Make snapshot & generate HTML report 📋
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
 ```kotlin
 val result = RxDisposableWatcher.probe() // Collect info: stacktrace, number of calls, type
@@ -43,7 +43,7 @@ val stream = FileOutputStream(file)
 stream.use { it.write(report.toByteArray()) }
 ```
 
-### Display HTML report on desktop
+### Display HTML report on desktop 🖥
 Pull report file from Android device and display in a browser:
 ```shell
 adb pull /sdcard/report.html ~/report.html # Grab a report from SD card
