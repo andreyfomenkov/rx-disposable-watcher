@@ -4,7 +4,7 @@ Consider the following RxJava code:
 ```kotlin
 val subject = BehaviorSubject.create<State>()
 // ...
-subject.subscribe { /* ... */ } // But what if we accidentally forget to unsubscribe by .dispose()?
+subject.subscribe { /* ... */ } // But then we accidentally forget to unsubscribe by dispose()
 ```
 We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩** With _RxDisposableWatcher_ it's possible to find & analyze all undestroyed subscriptions _at the moment_:
 
