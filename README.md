@@ -1,4 +1,4 @@
-## RxDisposableWatcher — monitoring undestroyed subscriptions in RxJava code 🐞
+## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
 ### The Problem:
 Consider the following RxJava code:
 ```kotlin
