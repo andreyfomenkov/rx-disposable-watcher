@@ -1,5 +1,5 @@
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
-### The Problem:
+### The Problem
 Consider the following RxJava code:
 ```kotlin
 val subject = BehaviorSubject.create<State>()
