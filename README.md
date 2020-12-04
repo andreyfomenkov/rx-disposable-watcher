@@ -1,12 +1,12 @@
-## RxDisposableWatcher — monitoring alive subscriptions in RxJava projects
+## RxDisposableWatcher — monitoring undestroyed subscriptions in RxJava code 🐞
 ### The Problem:
-Let's imagine the following situation with RxJava:
+Consider the following RxJava code:
 ```kotlin
 val subject = BehaviorSubject.create<State>()
 // ...
-subject.subscribe { /* Do something */ } // We didn't call dispose() to stop receiving items
+subject.subscribe { /* ... */ } // But what if we accidentally forget to unsubscribe by .dispose()?
 ```
-We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩** With _RxDisposableWatcher_ it's possible to catch and analyze all undestroyed subscriptions in your application _at the moment_:
+We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩** With _RxDisposableWatcher_ it's possible to find & analyze all undestroyed subscriptions _at the moment_:
 
 ## Getting started
 ### Download
@@ -24,7 +24,7 @@ Please replace `x.y.z` with the latest version numbers:
 ```kotlin
 RxDisposableWatcher.init()
 ```
-In order to save and then pull HTML report for Android application, add the necessary external storage permission into `AndroidManifest.xml`:
+For Android application add storage permission into `AndroidManifest.xml` to save & pull generated HTML report:
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
@@ -32,10 +32,10 @@ In order to save and then pull HTML report for Android application, add the nece
 ### Make snapshot & generate HTML report
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
 ```kotlin
-val result = RxDisposableWatcher.probe() // Exhaustive info: stacktrace, number of calls, etc.
+val result = RxDisposableWatcher.probe() // Collect info: stacktrace, number of calls, type
 val report = HtmlReportBuilder(result).build() // Generate HTML report
 ```
-Save the report to Android external storage:
+For Android save the report to SD card:
 ```kotlin
 val report = ...
 val file = File(context.getExternalFilesDir(null), "report.html") // Specify filename
@@ -43,17 +43,17 @@ val stream = FileOutputStream(file)
 stream.use { it.write(report.toByteArray()) }
 ```
 
-### Display HTML report
-Pull report file from Android device and display:
+### Display HTML report on desktop
+Pull report file from Android device and display in a browser:
 ```shell
-adb pull /sdcard/report.html ~/report.html # Grab a report from Android device
-# Then display in a browser
+adb pull /sdcard/report.html ~/report.html # Grab a report from SD card
 open ~/report.html # for Mac
 # or
 google-chrome ~/report.html # for Linux
 ```
+That's it!
 
-### Displaying HTML report (LIKE A BOSS 😎)
-**I want to have a magic button in Android Studio. By clicking display HTML report on my desktop.**
+### Displaying HTML report on desktop (Like a boss 😎)
+**I want a MAGIC BUTTON in Android Studio toolbar to show HTML report in one click!**
 
-It's always possible to do it using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html).
+It's possible to do run shell script using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html).
