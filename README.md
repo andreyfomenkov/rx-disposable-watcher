@@ -62,7 +62,7 @@ google-chrome ~/report.html # for Linux
 ```
 That's it!
 
-### Displaying HTML report in one click #Like a boss 😎#
+### Displaying HTML report in one click (Like a boss) 😎
 **I want a _magic button_ in Android Studio toolbar to show HTML report just in one click!**
 
 The idea is pretty simple:
@@ -70,13 +70,13 @@ The idea is pretty simple:
   <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png" width="650">
 </p>
 
-Steps of the implementation:
+Steps to implement (**read more details in my post on Medium**):
 1. Download [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png) script from the repository and modify constants inside;
 2. Create custom action in Android Studio using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html) to run `report.sh`;
-3. Register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, build & save HTML report;
+3. Register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, then build & save HTML report;
 4. Add new button to Android Studio toolbar and bind it with custom action from step 2.
 
-🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) for more details
+🔥 The post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
 
 ### Licence
 ```
