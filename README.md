@@ -76,4 +76,21 @@ Steps of the implementation:
 3. Register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, build & save HTML report;
 4. Add new button to Android Studio toolbar and bind it with custom action from step 2.
 
-🔥 For more details read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
+🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) for more details
+
+### Licence
+```
+Copyright 2020 Andrey Fomenkov
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
