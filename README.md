@@ -6,10 +6,14 @@ val subject = BehaviorSubject.create<State>()
 // ...
 subject.subscribe { /* ... */ } // Subscribed, but not disposed afterwards!
 ```
-We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩
+We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩**
 
-Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions _at the moment_ and analyze the exhaustive HTML report:
-
+Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions _at the moment_ & build the detailed HTML report:
+![](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/report.png)
+<p align="center">
+  <span>Everything we need: </span>
+  <b>stack trace, number of calls & Observable types.</b>
+</p>
 
 ## Getting started
 ### Download
