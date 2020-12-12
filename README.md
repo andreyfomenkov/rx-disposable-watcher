@@ -8,8 +8,10 @@ subject.subscribe { /* ... */ } // Subscribed, but not disposed afterwards!
 ```
 We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩**
 
-Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions _at the moment_ & build the detailed HTML report:
-![](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/report.png)
+Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build the detailed HTML report:
+<p align="center">
+  <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/report.png" width="550">
+</p>
 <p align="center">
   <span>Everything we need: </span>
   <b>stack trace, number of calls & Observable types.</b>
