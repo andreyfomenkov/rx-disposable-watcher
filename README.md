@@ -10,7 +10,7 @@ We subscribed to `BehaviorSubject` but never released a [Disposable](http://reac
 
 Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build the detailed HTML report:
 <p align="center">
-  <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/report.png" width="550">
+  <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/report.png" width="600">
 </p>
 <p align="center">
   <span>Everything we need: </span>
@@ -52,18 +52,28 @@ val stream = FileOutputStream(file)
 stream.use { it.write(report.toByteArray()) }
 ```
 
-### Display HTML report on desktop 🖥
-Pull report file from Android device and display in a browser:
+### Display HTML report in desktop browser 🖥
+Pull report file from Android device and display (replace with your paths):
 ```shell
 adb pull /sdcard/report.html ~/report.html # Grab a report from SD card
 open ~/report.html # for Mac
 # or
 google-chrome ~/report.html # for Linux
 ```
-See [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/report.sh) in the repository.
 That's it!
 
-### Displaying HTML report on desktop (Like a boss 😎)
-**I want a MAGIC BUTTON in Android Studio toolbar to show HTML report in one click!**
+### Displaying HTML report in one click #Like a boss 😎#
+**I want a _magic button_ in Android Studio toolbar to show HTML report just in one click!**
 
-It's possible to do run shell script using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html).
+The idea is pretty simple:
+<p align="center">
+  <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png" width="650">
+</p>
+
+Steps of the implementation:
+1. download [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png) script from the repository and modify constants inside;
+2. create custom action in Android Studio using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html) to run `report.sh`;
+3. register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, build & save HTML report;
+4. add new button to Android Studio toolbar and bind it with custom action from step 2.
+
+🔥 For detailed information read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit)
