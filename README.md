@@ -71,9 +71,9 @@ The idea is pretty simple:
 </p>
 
 Steps of the implementation:
-1. download [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png) script from the repository and modify constants inside;
-2. create custom action in Android Studio using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html) to run `report.sh`;
-3. register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, build & save HTML report;
-4. add new button to Android Studio toolbar and bind it with custom action from step 2.
+1. Download [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png) script from the repository and modify constants inside;
+2. Create custom action in Android Studio using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html) to run `report.sh`;
+3. Register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, build & save HTML report;
+4. Add new button to Android Studio toolbar and bind it with custom action from step 2.
 
-🔥 For detailed information read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit)
+🔥 For more details read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit)
