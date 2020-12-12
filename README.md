@@ -4,9 +4,12 @@ Consider the following RxJava code:
 ```kotlin
 val subject = BehaviorSubject.create<State>()
 // ...
-subject.subscribe { /* ... */ } // But then we accidentally forget to unsubscribe by dispose()
+subject.subscribe { /* ... */ } // Subscribed, but not disposed afterwards!
 ```
-We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource afterwards. **As a result it can break application logic or even cause a memory leak! 💩** With _RxDisposableWatcher_ it's possible to find & analyze all undestroyed subscriptions _at the moment_:
+We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩
+
+Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions _at the moment_ and analyze the exhaustive HTML report:
+
 
 ## Getting started
 ### Download
@@ -51,6 +54,7 @@ open ~/report.html # for Mac
 # or
 google-chrome ~/report.html # for Linux
 ```
+See [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/report.sh) in the repository.
 That's it!
 
 ### Displaying HTML report on desktop (Like a boss 😎)
