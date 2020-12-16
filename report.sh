@@ -7,7 +7,7 @@
 # REPLACE! placeholders <PATH_ON_SDCARD> and <PATH_ON_DESKTOP>
 
 BROADCAST_ACTION="com.testapp.rxreport"
-SLEEP_BEFORE_PULL=2 # Delay in seconds
+SLEEP_BEFORE_PULL=3 # Delay in seconds
 # Source location in Android device SD card
 REPORT_DEVICE_LOCATION=<PATH_ON_SDCARD>/report.html
 # Target location on a desktop
