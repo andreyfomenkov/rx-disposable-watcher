@@ -36,7 +36,7 @@ For Android application add storage permission into `AndroidManifest.xml` to sav
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
-⚠️ If you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another part of application tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) untility class. It has exclusive access to inject handlers for common RxJava operations. You can only find it and disable when using RxDisposableWatcher.
+⚠️ If you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another application component tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) utility class with exclusive access. Disable this component when working with this plugin.
 
 ### Make snapshot & generate HTML report 📋
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
