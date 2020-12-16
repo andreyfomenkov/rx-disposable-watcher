@@ -28,7 +28,6 @@ Please replace `x.y.z` with the latest version numbers:
 [ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg?version=1.0.0) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/1.0.0/link)
 - for [RxJava 3.x](https://github.com/ReactiveX/RxJava/tree/3.x) projects:
 [ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg?version=2.0.0) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/2.0.0/link)
-
 ### Initialization
 ```kotlin
 RxDisposableWatcher.init()
@@ -37,6 +36,7 @@ For Android application add storage permission into `AndroidManifest.xml` to sav
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
+⚠️ If you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another part of application tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) untility class. It has exclusive access to inject handlers for common RxJava operations. You can only find it and disable when using RxDisposableWatcher.
 
 ### Make snapshot & generate HTML report 📋
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
