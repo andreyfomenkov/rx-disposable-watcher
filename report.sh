@@ -1,17 +1,11 @@
 #!/bin/bash
+# Replace APPLICATION_ID, REPORT_DEVICE_LOCATION and REPORT_DESKTOP_LOCATION with your values
 
-# Script has the next steps:
-# - send broadcast event to Android device;
-# - wait a little bit;
-# - pull HTML report & display in a browser.
-# REPLACE! placeholders <PATH_ON_SDCARD> and <PATH_ON_DESKTOP>
-
-BROADCAST_ACTION="com.testapp.rxreport"
-SLEEP_BEFORE_PULL=3 # Delay in seconds
-# Source location in Android device SD card
-REPORT_DEVICE_LOCATION=<PATH_ON_SDCARD>/report.html
-# Target location on a desktop
-REPORT_DESKTOP_LOCATION=<PATH_ON_DESKTOP>/report.html
+BROADCAST_ACTION="build-rx-report" # Intent filter action for BroadcastReceiver
+APPLICATION_ID=com.myapplication
+SLEEP_BEFORE_PULL=3 # Give a time (in seconds) to generate & save HTML report
+REPORT_DEVICE_LOCATION=/storage/emulated/0/Android/data/$APPLICATION_ID/files/report.html # Location in Android device SD card
+REPORT_DESKTOP_LOCATION=~/report.html # Location on desktop
 
 adb shell am broadcast -a $BROADCAST_ACTION
 sleep $SLEEP_BEFORE_PULL
