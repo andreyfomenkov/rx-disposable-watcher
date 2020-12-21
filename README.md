@@ -1,3 +1,5 @@
+## ⚠️ This plugin is under construction now. Dependencies will be available a bit later ⚠️
+
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
 ### The Problem
 Consider the following RxJava code:
