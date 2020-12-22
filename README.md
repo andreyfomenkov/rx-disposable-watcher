@@ -4,11 +4,17 @@
 ### The Problem
 Consider the following RxJava code:
 ```kotlin
-val subject = BehaviorSubject.create<State>()
+class Thermometer {
+  fun observeTemperature(): Observable<Int>
+}
 // ...
-subject.subscribe { /* ... */ } // Subscribed, but not disposed afterwards!
+val thermometer = Thermometer.getInstance()
+// ...
+thermometer
+  .observeTemperature()
+  .subscribe { /* ... */ } // Subscribed, but not disposed afterwards!
 ```
-We subscribed to `BehaviorSubject` but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩**
+We subscribed to `Thermometer` instance but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩**
 
 Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build the detailed HTML report:
 <p align="center">
@@ -20,6 +26,7 @@ Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build t
 </p>
 
 ## Getting started
+🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
 ### Download
 Include library dependency into your Gradle project:
 ```groovy
@@ -38,7 +45,7 @@ For Android application add storage permission into `AndroidManifest.xml` to sav
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
-⚠️ If you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another application component tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) utility class with exclusive access. Disable this component when working with this plugin.
+⚠️ If you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another application component tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) utility class with exclusive access. Disable this component when working with the plugin.
 
 ### Make snapshot & generate HTML report 📋
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
@@ -54,7 +61,7 @@ val stream = FileOutputStream(file)
 stream.use { it.write(report.toByteArray()) }
 ```
 
-### Display HTML report in desktop browser 🖥
+### Display HTML report in a desktop browser 🖥
 Pull report file from Android device and display (replace with your paths):
 ```shell
 adb pull /sdcard/report.html ~/report.html # Grab a report from SD card
@@ -65,20 +72,16 @@ google-chrome ~/report.html # for Linux
 That's it!
 
 ### Displaying HTML report in one click (Like a boss) 😎
-**I want a _magic button_ in Android Studio toolbar to show HTML report just in one click!**
+**I want a _magic button_ in Android Studio toolbar to show HTML report in one click!**
 
 The idea is pretty simple:
 <p align="center">
   <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png" width="650">
 </p>
 
-Steps to implement (**read more details in my post on Medium**):
-1. Download [report.sh](https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/magic.png) script from the repository and modify constants inside;
-2. Create custom action in Android Studio using [External Tools](https://www.jetbrains.com/help/idea/settings-tools-external-tools.html) to run `report.sh`;
-3. Register custom [BroadcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver) in your app to handle special event, then build & save HTML report;
-4. Add new button to Android Studio toolbar and bind it with custom action from step 2.
+As a lazy developer I prefer the described approach, because it dramatically saves my time!
 
-🔥 The post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
+How to add this button? Read the dedicated section in my post on Medium: [Display a report in one click from Android Studio](https://medium.com/p/8c2226dce01c/edit#55b9)
 
 ### Licence
 ```
