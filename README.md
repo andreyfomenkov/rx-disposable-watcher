@@ -1,4 +1,4 @@
-## ⚠️ This plugin is under construction now. Dependencies will be available a bit later ⚠️
+## ⚠️ This plugin is under construction. Dependencies will be available later ⚠️
 
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
 ### The Problem
