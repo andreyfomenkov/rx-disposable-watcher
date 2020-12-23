@@ -118,7 +118,7 @@ object RxDisposableWatcher {
                 probes += ProbeEntry(sourceType, croppedTrace, entries)
             }
         }
-        return probes
+        return probes.sortedByDescending { it.entries }
     }
 
     private fun crop(trace: StackTrace, source: SourceType) = trace.crop { element ->

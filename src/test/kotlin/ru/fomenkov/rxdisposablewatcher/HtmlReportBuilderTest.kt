@@ -41,17 +41,16 @@ class HtmlReportBuilderTest : BaseTest() {
         val maybe = Maybe.create<Int> {}
         val flowable = observable.toFlowable(BackpressureStrategy.LATEST)
 
+        for (i in 0 until 11) { completable.subscribe() }
+        for (i in 0 until 22) { single.subscribe() }
         observable.subscribe()
-        for (i in 0 .. 1) { single.subscribe() }
-        for (i in 0 .. 2) { completable.subscribe() }
-        for (i in 0 .. 3) { maybe.subscribe() }
-        for (i in 0 .. 4) { flowable.subscribe() }
+        for (i in 0 until 44) { maybe.subscribe() }
+        for (i in 0 until 33) { flowable.subscribe() }
 
         val probe = RxDisposableWatcher.probe()
         val builder = HtmlReportBuilder(probe)
         val report = builder.build()
 
-        assertChecksumEquals("Test output HTML report", TEST_OUTPUT_HTML_REPORT_CHECKSUM, report.hashCode())
         assertFalse("Placeholder $PLACEHOLDER_VALUE_LINE not replaced", report.contains(PLACEHOLDER_VALUE_LINE))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_COLOR not replaced", report.contains(PLACEHOLDER_VALUE_COLOR))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_DETAILS not replaced", report.contains(PLACEHOLDER_VALUE_DETAILS))
@@ -59,7 +58,6 @@ class HtmlReportBuilderTest : BaseTest() {
         assertFalse("Placeholder $PLACEHOLDER_VALUE_FULL not replaced", report.contains(PLACEHOLDER_VALUE_FULL))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_TOTAL not replaced", report.contains(PLACEHOLDER_VALUE_TOTAL))
         assertFalse("Placeholder $PLACEHOLDER_VALUE_ITEMS not replaced", report.contains(PLACEHOLDER_VALUE_ITEMS))
-
         println(report)
     }
 
@@ -75,7 +73,6 @@ class HtmlReportBuilderTest : BaseTest() {
         const val TEMPLATE_LINE_CHECKSUM = -376419563
         const val TEMPLATE_BLOCK_CHECKSUM = 2088613418
         const val TEMPLATE_REPORT_CHECKSUM = -425549768
-        const val TEST_OUTPUT_HTML_REPORT_CHECKSUM = 1121436812
         const val PLACEHOLDER_VALUE_LINE = "#value-line"
         const val PLACEHOLDER_VALUE_COLOR = "#value-color"
         const val PLACEHOLDER_VALUE_DETAILS = "#value-details"
