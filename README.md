@@ -1,5 +1,5 @@
-## ⚠️ Under construction. The post on Medium will be published later in January ⚠️
-
+## ⚠️ Under construction. The post on Medium will be published later in January
+       
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
 ### The Problem
 Consider the following RxJava code:
