@@ -92,7 +92,7 @@ The idea is pretty simple:
 
 As a lazy developer I prefer the described approach, because it dramatically saves my time!
 
-How to add this button? Read the dedicated section in my post on Medium: [Display a report in one click from Android Studio](https://medium.com/p/8c2226dce01c/edit#55b9)
+How to add this button? 👉 Read the dedicated section in my post: [Display a report in one click from Android Studio](https://medium.com/p/8c2226dce01c/edit#55b9)
 
 ### Licence
 ```
