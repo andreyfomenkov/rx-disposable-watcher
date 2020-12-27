@@ -14,7 +14,9 @@ thermometer
 ```
 We subscribed to `Thermometer` instance but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can blow up an application logic or even cause a memory leak! 💩**
 
-Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build the detailed HTML report:
+🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
+
+Use RxDisposableWatcher plugin to find all undestroyed subscriptions & build the detailed HTML report:
 <p align="center">
   <img src="https://github.com/andreyfomenkov/rx-disposable-watcher/blob/1.x/images/report.png" width="600">
 </p>
@@ -24,7 +26,6 @@ Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build t
 </p>
 
 ## Getting started
-🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
 ### Setup
 Gradle:
 ```groovy
