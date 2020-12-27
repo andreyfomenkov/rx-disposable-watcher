@@ -1,6 +1,6 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.Completable
+import io.reactivex.rxjava3.core.Completable
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

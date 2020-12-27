@@ -1,7 +1,7 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.*
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import org.junit.Assert.*
 import org.junit.Test
 import java.lang.ref.WeakReference

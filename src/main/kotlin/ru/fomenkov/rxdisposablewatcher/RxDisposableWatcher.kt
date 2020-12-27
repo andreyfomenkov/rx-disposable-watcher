@@ -1,12 +1,12 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.*
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.BiFunction
-import io.reactivex.internal.observers.*
-import io.reactivex.internal.operators.maybe.MaybeCallbackObserver
-import io.reactivex.internal.subscribers.LambdaSubscriber
-import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.BiFunction
+import io.reactivex.rxjava3.internal.observers.*
+import io.reactivex.rxjava3.internal.operators.maybe.MaybeCallbackObserver
+import io.reactivex.rxjava3.internal.subscribers.LambdaSubscriber
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import org.reactivestreams.Subscriber
 import java.lang.ref.WeakReference
 

@@ -1,7 +1,7 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.*
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.concurrent.TimeUnit

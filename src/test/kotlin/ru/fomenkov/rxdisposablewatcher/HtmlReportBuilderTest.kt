@@ -1,6 +1,6 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.*
+import io.reactivex.rxjava3.core.*
 import org.junit.Assert.*
 import org.junit.Test
 import ru.fomenkov.rxdisposablewatcher.report.HtmlReportBuilder

@@ -1,6 +1,6 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.Maybe
+import io.reactivex.rxjava3.core.Maybe
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

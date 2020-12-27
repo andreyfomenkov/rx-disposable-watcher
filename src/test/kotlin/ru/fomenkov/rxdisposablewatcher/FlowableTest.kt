@@ -1,7 +1,7 @@
 package ru.fomenkov.rxdisposablewatcher
 
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.core.Observable
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
