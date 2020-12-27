@@ -47,7 +47,8 @@ Maven:
 Please replace `x.y.z` with the latest version numbers:
 - for [RxJava 2](https://github.com/ReactiveX/RxJava/tree/2.x) projects:
 [ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg?version=1.0.0) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/1.0.0/link)
-- for [RxJava 3](https://github.com/ReactiveX/RxJava/tree/3.x) projects: TODO
+- for [RxJava 3](https://github.com/ReactiveX/RxJava/tree/3.x) projects:
+[ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/_latestVersion)
 
 ### Initialization
 ```kotlin
