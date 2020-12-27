@@ -12,7 +12,7 @@ thermometer
   .observeTemperature()
   .subscribe { /* ... */ } // Subscribed, but not disposed afterwards!
 ```
-We subscribed to `Thermometer` instance but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can break application logic or even cause a memory leak! 💩**
+We subscribed to `Thermometer` instance but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can blow up an application logic or even cause a memory leak! 💩**
 
 Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build the detailed HTML report:
 <p align="center">
