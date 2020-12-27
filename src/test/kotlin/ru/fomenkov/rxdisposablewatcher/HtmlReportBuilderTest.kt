@@ -72,7 +72,7 @@ class HtmlReportBuilderTest : BaseTest() {
         const val TEMPLATE_REPORT = "$TEMPLATE_DIR/report.html"
         const val TEMPLATE_LINE_CHECKSUM = -376419563
         const val TEMPLATE_BLOCK_CHECKSUM = 2088613418
-        const val TEMPLATE_REPORT_CHECKSUM = -425549768
+        const val TEMPLATE_REPORT_CHECKSUM = 724824997
         const val PLACEHOLDER_VALUE_LINE = "#value-line"
         const val PLACEHOLDER_VALUE_COLOR = "#value-color"
         const val PLACEHOLDER_VALUE_DETAILS = "#value-details"
