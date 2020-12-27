@@ -20,7 +20,7 @@ class StackTrace {
 
     private fun init() {
         val builder = StringBuilder()
-        elements.forEach { element -> builder.append(element).append("\n") }
+        filterStackTrace(elements).forEach { element -> builder.append(element).append("\n") }
         string = builder.toString()
         hashCode = string.hashCode()
     }
@@ -34,12 +34,39 @@ class StackTrace {
 
     fun elements() = elements
 
+    private fun filterStackTrace(list: List<Element>) = list
+        .filterNot { element ->
+            EXCLUDED_PACKAGE_NAMES.forEach { packageName ->
+                if (element.className.startsWith(packageName)) {
+                    return@filterNot true
+                }
+            }
+            false
+        }
+
     override fun equals(other: Any?) = when (other is StackTrace) {
-        true -> other.elements == elements
+        true -> {
+            val otherList = filterStackTrace(other.elements)
+            val currList = filterStackTrace(elements)
+
+            when (otherList.size == currList.size) {
+                true -> otherList == currList
+                else -> false
+            }
+        }
         else -> false
     }
 
     override fun hashCode() = hashCode
 
     override fun toString() = string
+
+    private companion object {
+        val EXCLUDED_PACKAGE_NAMES = setOf(
+            "android.",
+            "androidx.",
+            "java.lang.",
+            "com.android."
+        )
+    }
 }
