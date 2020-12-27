@@ -1,5 +1,3 @@
-## ⚠️ This plugin is under construction. Dependencies will be available later ⚠️
-
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
 ### The Problem
 Consider the following RxJava code:
@@ -27,16 +25,29 @@ Use _RxDisposableWatcher_ plugin to find all undestroyed subscriptions & build t
 
 ## Getting started
 🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
-### Download
-Include library dependency into your Gradle project:
+### Setup
+Gradle:
 ```groovy
+repositories {
+    jcenter()
+}
+
 implementation 'ru.fomenkov:rx-disposable-watcher:x.y.z'
 ```
+Maven:
+```xml
+<dependency>
+  <groupId>ru.fomenkov</groupId>
+  <artifactId>rx-disposable-watcher</artifactId>
+  <version>x.y.z</version>
+  <type>pom</type>
+</dependency>
+```
 Please replace `x.y.z` with the latest version numbers:
-- for [RxJava 2.x](https://github.com/ReactiveX/RxJava/tree/2.x) projects:
+- for [RxJava 2](https://github.com/ReactiveX/RxJava/tree/2.x) projects:
 [ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg?version=1.0.0) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/1.0.0/link)
-- for [RxJava 3.x](https://github.com/ReactiveX/RxJava/tree/3.x) projects:
-[ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg?version=2.0.0) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/2.0.0/link)
+- for [RxJava 3](https://github.com/ReactiveX/RxJava/tree/3.x) projects: TODO
+
 ### Initialization
 ```kotlin
 RxDisposableWatcher.init()
@@ -45,9 +56,9 @@ For Android application add storage permission into `AndroidManifest.xml` to sav
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
-⚠️ If you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another application component tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) utility class with exclusive access. Disable this component when working with the plugin.
+⚠️ **Note:** in case you're facing with `IllegalStateException: Plugins can't be changed anymore`, then another application component tries to use [RxJavaPlugins](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/plugins/RxJavaPlugins.html) utility class with exclusive access. Disable this component when working with the plugin.
 
-### Make snapshot & generate HTML report 📋
+### Make snapshot & generate HTML report
 Now you're ready to go! Check whether you have alive Rx subscriptions at the moment:
 ```kotlin
 val result = RxDisposableWatcher.probe() // Collect info: stacktrace, number of calls, type
@@ -61,7 +72,7 @@ val stream = FileOutputStream(file)
 stream.use { it.write(report.toByteArray()) }
 ```
 
-### Display HTML report in a desktop browser 🖥
+### Display HTML report in a desktop browser
 Pull report file from Android device and display (replace with your paths):
 ```shell
 adb pull /sdcard/report.html ~/report.html # Grab a report from SD card
