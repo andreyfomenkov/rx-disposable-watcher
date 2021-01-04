@@ -1,5 +1,3 @@
-## ⚠️ Under construction. The post on Medium will be published later in January
-       
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
 ### The Problem
 Consider the following RxJava code:
@@ -16,7 +14,7 @@ thermometer
 ```
 We subscribed to `Thermometer` instance but never released a [Disposable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/disposables/Disposable.html) resource later. **As a result it can blow up an application logic or even cause a memory leak! 💩**
 
-🔥 Read my post on Medium: [Find Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://medium.com/p/8c2226dce01c/edit) 🔥
+🔥 Read my post on Medium: [Detect Leaked Subscriptions in RxJava code with RxDisposableWatcher](https://andrey-fomenkov.medium.com/find-leaked-subscriptions-in-rxjava-code-using-rxdisposablewatcher-8c2226dce01c) 🔥
 
 Use RxDisposableWatcher plugin to find all undestroyed subscriptions & build the detailed HTML report:
 <p align="center">
@@ -96,7 +94,7 @@ The idea is pretty simple:
 
 As a lazy developer I prefer the described approach, because it dramatically saves my time!
 
-How to add this button? 👉 Read the dedicated section in my post: [Display a report in one click from Android Studio](https://medium.com/p/8c2226dce01c/edit#55b9)
+How to add this button? 👉 Read the dedicated section in my post: [Get a report in one click from Android Studio](https://andrey-fomenkov.medium.com/find-leaked-subscriptions-in-rxjava-code-using-rxdisposablewatcher-8c2226dce01c#ae2a)
 
 ### Licence
 ```
