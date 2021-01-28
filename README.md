@@ -1,5 +1,5 @@
 ## RxDisposableWatcher — find leaked subscriptions in RxJava code 🐞
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RxDisposableWatcher-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/8225)
+[ ![Download](https://api.bintray.com/packages/andreyfomenkov/maven/rx-disposable-watcher/images/download.svg?version=1.0.0) ](https://bintray.com/andreyfomenkov/maven/rx-disposable-watcher/1.0.0/link) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RxDisposableWatcher-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/8225)
 ### The Problem
 Consider the following RxJava code:
 ```kotlin
